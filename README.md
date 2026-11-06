@@ -1,214 +1,146 @@
-# Workshop - 2 Object-detection-using-web-camera
+# ATM-AND-BANKING-SYSTEM
 
-## Aim
+**Name:** Rithika K
 
-To access the laptop camera, capture an image, and detect objects present in the captured image using the YOLOv8 object detection model.
+**Register Number:** 212225040343
 
----
+**Date:** 06-11-2026
 
-## Software Requirements
+## AIM
 
-- Anaconda
-- Jupyter Notebook
-- Python
-- OpenCV (`cv2`)
-- Ultralytics YOLOv8
-- NumPy
-- Matplotlib
-- Laptop Camera
+To develop the ATM and Banking System using Star UML.
 
----
+## Problem Statement
 
-## Developed By
+1. Banks need to provide fast, secure, and self-service access to basic banking functionalities.
 
-- **Name:** Rithika K
-- **Register No:** 212225040343
+2. Manual banking for simple tasks, such as cash withdrawal or balance inquiry, leads to long queues and inefficient use of bank staff.
 
----
+3. There is a lack of consistent and secure user authentication in some older systems.
 
-## ⚙️ Algorithm
+4. Existing ATM systems may not be user-friendly or may lack multilingual support.
 
-### Step 1:
-Import the necessary libraries, including OpenCV, Ultralytics YOLO, and other required modules.
+5. Customers require 24/7 access to basic banking services without depending on bank working hours.
 
-### Step 2:
-Load the pretrained YOLOv8 model using the `YOLO()` function.
+6. A reliable ATM software system is needed to provide efficient banking services.
 
-### Step 3:
-Access the laptop camera using `cv2.VideoCapture(0)`.
+7. Allow users to securely access their accounts using ATM cards and PINs.
 
-### Step 4:
-Check whether the laptop camera is successfully opened.
+8. Enable operations such as cash withdrawal, balance inquiry, mini statement printing, and PIN change.
 
-### Step 5:
-Wait for 5 seconds to allow the camera to initialize and capture a clear image.
+9. Ensure real-time processing and data consistency with the core banking system.
 
-### Step 6:
-Capture an image from the laptop camera using `cap.read()`.
+10. Provide a simple and intuitive user interface.
 
-### Step 7:
-Display the captured image using OpenCV or Matplotlib.
+# UML DIAGRAMS
 
-### Step 8:
-Pass the captured image to the YOLOv8 model for object detection.
+## USE CASE DIAGRAM
 
-### Step 9:
-Identify the objects present in the image and generate bounding boxes with class labels and confidence scores.
+A use case diagram is a graphical depiction of a user's possible interactions with a system. The use cases are represented by circles or ellipses. The actors are often shown as stick figures.
 
-### Step 10:
-Display the final detected image with bounding boxes and labels.
+UML is the modeling toolkit that can be used to build diagrams. Use cases are represented with labeled oval shapes.
 
-### Step 11:
-Repeat the experiment using three different scenes and compare the detection results.
+Stick figures represent actors in the process, and the actor's participation in the system is modeled with a line between the actor and the use case.
 
----
+### UML Use Case Diagrams Are Ideal For
 
-## Algorithm Flowchart
+- Representing the goals of system-user interactions.
+- Defining and organizing functional requirements in a system.
+- Specifying the context and requirements of a system.
+- Modeling the basic flow of events in a single use case.
 
-```text
-       Laptop Camera
-             |
-             v
-       Capture Image
-             |
-             v
-       Display Image
-             |
-             v
-      YOLOv8 Detection
-             |
-             v
-   Identify Detected Objects
-             |
-             v
- Display Bounding Boxes
-       and Labels
-             |
-             v
-       Final Output
-```
+### Use Case Diagram
 
----
+<img width="525" height="872" alt="image" src="https://github.com/user-attachments/assets/6c6463cc-65ca-4995-906f-959ecb94517d" />
 
-## Program
 
-```python
-from ultralytics import YOLO
-import cv2
-import matplotlib.pyplot as plt
-from IPython.display import clear_output
+## CLASS DIAGRAM
 
-# Load a more accurate YOLO model
-model = YOLO("yolov8m.pt")
+The Unified Modeling Language (UML) can help model systems in various ways. One of the most popular types of UML diagrams is the class diagram.
 
-# Open webcam
-cap = cv2.VideoCapture(0)
+Class diagrams are used by software engineers to document software architecture. They are structural diagrams because they describe what must be present in the system being modeled.
 
-if not cap.isOpened():
-    print("Error: Could not open webcam.")
+### Benefits of Class Diagrams
 
-else:
-    video_writer = None
+- Better understand the general overview of an application's structure.
+- Visually express the specific requirements of a system.
+- Communicate system requirements throughout an organization.
+- Represent the structure and relationships between classes.
 
-    try:
-        while True:
+### Class Diagram
 
-            ret, frame = cap.read()
+<img width="632" height="754" alt="image" src="https://github.com/user-attachments/assets/414711b6-c905-4328-9f5d-2c48618030cb" />
 
-            if not ret:
-                break
 
-            results = model(
-                frame,
-                conf=0.60,
-                verbose=False
-            )
+## COMMUNICATION DIAGRAM
 
-            annotated_frame = results[0].plot()
+A communication diagram offers information similar to a sequence diagram. However, while a sequence diagram emphasizes the time and order of events, a communication diagram emphasizes the messages exchanged between objects in an application.
 
-            # Initialize video writer
-            if video_writer is None:
-                h, w = annotated_frame.shape[:2]
+Communication diagrams help provide a better understanding of how components communicate and interact with each other rather than focusing solely on the sequence of events.
 
-                video_writer = cv2.VideoWriter(
-                    "YOLO_Detection_Output.mp4",
-                    cv2.VideoWriter_fourcc(*"mp4v"),
-                    20,
-                    (w, h)
-                )
+### Communication Diagram
 
-            # Save detected frame
-            video_writer.write(annotated_frame)
+<img width="1610" height="467" alt="image" src="https://github.com/user-attachments/assets/607d469e-2020-4334-8255-c0f3c582f4d2" />
 
-            # Display output in Jupyter
-            rgb_frame = cv2.cvtColor(
-                annotated_frame,
-                cv2.COLOR_BGR2RGB
-            )
 
-            clear_output(wait=True)
+## PACKAGE DIAGRAM
 
-            plt.figure(figsize=(10, 8))
-            plt.imshow(rgb_frame)
-            plt.title("YOLO Real-Time Object Detection")
-            plt.axis("off")
-            plt.show()
+Package diagrams are structural diagrams used to show the organization and arrangement of various model elements in the form of packages.
 
-    except KeyboardInterrupt:
-        print("Detection stopped.")
+A package is a grouping of related UML elements, such as diagrams, documents, classes, or other packages. Each element is nested within a package, which is depicted as a folder within the diagram and arranged hierarchically.
 
-    finally:
-    # Release webcam
-        cap.release()
+Package diagrams are commonly used to provide a visual organization of the layered architecture within a software system.
 
-    # Release video writer
-    if video_writer is not None:
-        video_writer.release()
+### Benefits of Package Diagrams
 
-    print("Webcam released.")
-    print("Video saved as YOLO_Detection_Output.mp4")
-```
+- Organize related UML elements.
+- Represent the structure of a software system.
+- Show dependencies between packages.
+- Improve the understanding of system architecture.
 
----
+### Package Diagram
 
-## Student Task
+<img width="1334" height="1190" alt="image" src="https://github.com/user-attachments/assets/75c47527-f02f-4ec7-9f08-08a33e9c5d79" />
 
-1. Capture your own image using the laptop camera.
-2. Detect the objects present in the captured image.
-3. Display the final output with bounding boxes and labels.
-4. Perform the experiment using **3 different scenes**.
-5. Observe and compare the detected objects in each scene.
 
----
+## ACTIVITY DIAGRAM
 
-## Expected Output and Original Captured Image
+The Unified Modeling Language includes several subsets of diagrams, including structural diagrams, interaction diagrams, and behavioral diagrams.
 
-<img width="846" height="657" alt="image" src="https://github.com/user-attachments/assets/ce227a51-eb00-464b-928f-06bc2af84ce6" />
+Activity diagrams, along with use case and state machine diagrams, are considered behavioral diagrams because they describe what must happen in the system being modeled.
 
+Activity diagrams help business stakeholders and developers understand the same process and behavior clearly.
 
+### Benefits of Activity Diagrams
 
+- Demonstrate the logic of an algorithm.
+- Describe the steps performed in a UML use case.
+- Represent the workflow of a system.
+- Show the sequence of activities and decisions.
 
----
+### Activity Diagram
 
-## Submission Requirements
+<img width="597" height="2160" alt="image" src="https://github.com/user-attachments/assets/d7d7f7ac-6b1a-42a6-a3ca-301a97694cc1" />
 
-- Jupyter Notebook (`.ipynb`)
-- Three original captured images
-- Three YOLOv8 output images
-- Screenshot of the final results
 
----
+## SEQUENCE DIAGRAM
 
-## GitHub Reference
+A sequence diagram is a type of interaction diagram because it describes how and in what order a group of objects works together.
 
-[Ultralytics YOLOv8 – Official GitHub Repository](https://github.com/ultralytics/ultralytics)
+These diagrams are used by software developers and business professionals to understand the requirements of a new system or document an existing process. Sequence diagrams are sometimes known as event diagrams or event scenarios.
 
----
+### Benefits of Sequence Diagrams
 
-## Result
+- Represent the details of UML use cases.
+- Model the logic of a sophisticated procedure, function, or operation.
+- Show how objects and components interact to complete a process.
+- Plan and understand the detailed functionality of an existing or future scenario.
 
-Thus, object detection was successfully performed using the YOLOv8 model by accessing the laptop camera, capturing images, and identifying objects with bounding boxes and labels across three different scenes.
+### Sequence Diagram
 
----
+<img width="1146" height="1253" alt="image" src="https://github.com/user-attachments/assets/e50ee299-ecb3-4f1c-8532-48b772902a09" />
 
-**Platform:** Anaconda + Jupyter Notebook
+
+## RESULT
+
+Thus, the project to develop an ATM and Banking System using StarUML software was completed successfully.
