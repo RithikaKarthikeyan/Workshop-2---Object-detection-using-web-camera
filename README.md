@@ -183,7 +183,8 @@ else:
 
 ## Expected Output and Original Captured Image
 
-![Uploading image.png…]()
+<img width="846" height="657" alt="image" src="https://github.com/user-attachments/assets/ce227a51-eb00-464b-928f-06bc2af84ce6" />
+
 
 
 
